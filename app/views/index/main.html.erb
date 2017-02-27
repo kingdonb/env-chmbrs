@@ -1,4 +1,8 @@
 <h1>Thing Data</h1>
+
+<%= line_chart @thing1_data %>
+<%= line_chart @thing2_data %>
+
 <p>EnvData count: <%= @data_count %></p>
-<p>Thing1 count: <%= @thing1_count %></p>
-<p>Thing2 count: <%= @thing2_count %></p>
+
+<%= yield :charts_js %>
