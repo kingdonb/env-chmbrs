@@ -9,4 +9,6 @@ task :message_database => :environment do
     require "#{Rails.root}/script/feeds"
     puts " done."
   end
+
+  scheduler.join
 end
