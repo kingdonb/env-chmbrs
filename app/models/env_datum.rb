@@ -1,0 +1,2 @@
+class EnvDatum < ApplicationRecord
+end

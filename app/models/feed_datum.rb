@@ -1,0 +1,2 @@
+class FeedDatum < ApplicationRecord
+end
