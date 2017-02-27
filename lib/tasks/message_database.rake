@@ -1,5 +1,6 @@
 desc "Update messages from thingspeak in database"
 task :message_database => :environment do
+  require "#{Rails.root}/script/feeds"
   require 'rufus/scheduler'
 
   scheduler = Rufus::Scheduler.new
