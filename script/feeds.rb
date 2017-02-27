@@ -1,4 +1,3 @@
-require 'awesome_print'
 require 'net/http'
 require 'json'
 
@@ -6,8 +5,6 @@ url='http://api.thingspeak.com/channels/198792/feeds.json?results=30'
 uri = URI(url)
 response = Net::HTTP.get(uri)
 j = JSON.parse(response)
-
-require 'ap'
 
 class Message
   attr_accessor :feeds, :channel
@@ -17,7 +14,6 @@ class Message
   end
 
   def valid?
-    ap channel
     return false unless channel["field1"] == "Humidity 1" && \
       channel["field2"] == "Temp C 1" && \
       channel["field3"] == "Temp F 1" && \
@@ -74,5 +70,6 @@ class Message
 end
 
 m = Message.new(j["feeds"], j["channel"])
-puts m.valid?.to_s
-ap m.data
+if m.valid?
+  m.data
+end
