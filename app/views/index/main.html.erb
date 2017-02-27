@@ -1,7 +1,6 @@
 <h1>Thing Data</h1>
 
-<%= line_chart @thing1_data %>
-<%= line_chart @thing2_data %>
+<%= line_chart @thing_data.group_by_period(:hour, :created_at, format: "%-l %P").average(:temp_c) %>
 
 <p>EnvData count: <%= @data_count %></p>
 
