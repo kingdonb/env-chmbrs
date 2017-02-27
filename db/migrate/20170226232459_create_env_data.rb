@@ -11,5 +11,6 @@ class CreateEnvData < ActiveRecord::Migration[5.0]
     end
 
     add_index :env_data, :entry_id, unique: true
+    add_index :env_data, :thing_id
   end
 end

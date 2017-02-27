@@ -1,18 +1,31 @@
 class Message
   attr_accessor :feeds, :channel
+
   def self.fetch_and_process_message(uri)
-    Rails.logger.info "Fetching 30 results from ThingSpeak Feeds API"
+    Rails.logger.info "Fetching data points via ThingSpeak Feeds API"
     response = Net::HTTP.get(uri)
     j = JSON.parse(response)
     Rails.logger.info "Parsed JSON response"
 
-    Rails.logger.info "Pulling channel json and copying entries to heroku, ..."
     m = Message.new(j["feeds"], j["channel"])
+    Rails.logger.info "Copying new entries to heroku, ..."
     if m.valid?
-      Rails.logger.info "found valid feed message"
+      Rails.logger.info "Found valid feed message"
       m.data
     end
-    Rails.logger.info " done."
+
+    Rails.logger.info "Update complete, rufus-scheduler sleeping another 30 minutes."
+  end
+
+  def self.create_env_datum(entry, thing_id, thing_name, humidity_field, temp_c_field, temp_f_field)
+    e = EnvDatum.new
+    e.thing_id = thing_id
+    e.humidity = entry[humidity_field]
+    e.temp_c = entry[temp_c_field]
+    e.temp_f = entry[temp_f_field]
+    e.entry_id = entry["entry_id"]
+    e.created_at = DateTime.parse(entry["created_at"])
+    e.save
   end
 
   def initialize(feeds,channel)
@@ -47,16 +60,9 @@ class Message
   def idem_add_data_thing1(datum)
     e = EnvDatum.find_by(entry_id: datum["entry_id"])
     unless e
-      Rails.logger.info "adding entry_id #{datum["entry_id"]} for thing1"
-      e = EnvDatum.new
+      Rails.logger.info "adding entry_id #{datum["entry_id"]} from thing1"
       thing_id = 1
-
-      e.thing_id = thing_id
-      e.humidity = datum["field1"]
-      e.temp_c = datum["field2"]
-      e.temp_f = datum["field3"]
-      e.entry_id = datum["entry_id"]
-      e.save
+      Message.create_env_datum(datum, thing_id, "thing1", "field1", "field2", "field3")
       Rails.logger.info "saved"
     end
     return e
@@ -64,16 +70,9 @@ class Message
   def idem_add_data_thing2(datum)
     e = EnvDatum.find_by(entry_id: datum["entry_id"])
     unless e
-      Rails.logger.info "adding entry_id #{datum["entry_id"]} for thing2"
-      e = EnvDatum.new
+      Rails.logger.info "adding entry_id #{datum["entry_id"]} from thing2"
       thing_id = 2
-
-      e.thing_id = thing_id
-      e.humidity = datum["field4"]
-      e.temp_c = datum["field5"]
-      e.temp_f = datum["field6"]
-      e.entry_id = datum["entry_id"]
-      e.save
+      Message.create_env_datum(datum, thing_id, "thing2", "field4", "field5", "field6")
       Rails.logger.info "saved"
     end
     return e
