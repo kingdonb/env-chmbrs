@@ -18,4 +18,6 @@ RUN cd /tmp/bundle && bundle install \
   && rm -rf /tmp/bundle/ \
   && cd /usr/local/bundle && rm -rf cache/*
 
-ENTRYPOINT ["jenkins-slave"]
+#ADD . /home/jenkins/workspace/env-chmbr
+#CMD cd /home/jenkins/workspace/env-chmbr && bundle exec rails c
+
