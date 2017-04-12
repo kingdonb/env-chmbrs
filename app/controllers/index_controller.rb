@@ -5,7 +5,7 @@ class IndexController < ApplicationController
     @thing_data_short = EnvDatum.joins(:thing).group('things.name').
       where("env_data.created_at >= ?", Time.zone.now - 4.hours)
     @thing_data_long = EnvDatum.joins(:thing).group('things.name').
-      where("env_data.created_at >= ?", Time.zone.now - 2.weeks)
+      where("env_data.created_at >= ?", Time.zone.now - 1.day)
     @data_count = EnvDatum.all.count
   end
 end
