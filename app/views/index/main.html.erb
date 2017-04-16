@@ -65,6 +65,38 @@
     },
   }, adapter: "google" %>
 
+<%= line_chart @thing_data_vlong.
+  group_by_minute('env_data.created_at', series: false, format: "%F %R %z").
+  average(:temp_c),
+  library: {
+    title: 'Temperature',
+    vAxis: {
+      title: '°C',
+      gridlines: {count: 12}
+    },
+    hAxis: {
+      title: "#{Date.yesterday.strftime("%A %F")} to #{Date.today.strftime("%A %F")}",
+      slantedText: true,
+      gridlines: {count: 24}
+    },
+  }, adapter: "google" %>
+
+<%= line_chart @thing_data_vlong.
+  group_by_hour('env_data.created_at', series: false, format: "%F %R %z").
+  average(:humidity),
+  library: {
+    title: 'Humidity',
+    vAxis: {
+      title: "Percent (%)",
+      gridlines: {count: 12}
+    },
+    hAxis: {
+      title: "#{Date.yesterday.strftime("%A %F")} to #{Date.today.strftime("%A %F")}",
+      slantedText: true,
+      gridlines: {count: 24}
+    },
+  }, adapter: "google" %>
+
 <p>EnvData count: <%= @data_count %></p>
 
 <%= yield :charts_js %>
