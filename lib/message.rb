@@ -2,19 +2,19 @@ class Message
   attr_accessor :feeds, :channel
 
   def self.fetch_and_process_message(uri)
-    Rails.logger.info "Fetching data points via ThingSpeak Feeds API"
+    Rails.logger.debug "Fetching data points via ThingSpeak Feeds API"
     response = Net::HTTP.get(uri)
     j = JSON.parse(response)
-    Rails.logger.info "Parsed JSON response"
+    Rails.logger.debug "Parsed JSON response"
 
     m = Message.new(j["feeds"], j["channel"])
-    Rails.logger.info "Copying new entries to heroku, ..."
+    Rails.logger.debug "Copying new entries to heroku, ..."
     if m.valid?
-      Rails.logger.info "Found valid feed message"
+      Rails.logger.debug "Found valid feed message"
       m.data
     end
 
-    Rails.logger.info "Update complete, rufus-scheduler sleeping another 30 minutes."
+    Rails.logger.debug "Update complete, rufus-scheduler sleeping another 30 minutes."
   end
 
   def self.create_env_datum(entry, thing_id, thing_name, humidity_field, temp_c_field, temp_f_field)
@@ -60,20 +60,20 @@ class Message
   def idem_add_data_thing1(datum)
     e = EnvDatum.find_by(entry_id: datum["entry_id"])
     unless e
-      Rails.logger.info "adding entry_id #{datum["entry_id"]} from thing1"
+      Rails.logger.debug "adding entry_id #{datum["entry_id"]} from thing1"
       thing_id = 1
       Message.create_env_datum(datum, thing_id, "thing1", "field1", "field2", "field3")
-      Rails.logger.info "saved"
+      Rails.logger.debug "saved"
     end
     return e
   end
   def idem_add_data_thing2(datum)
     e = EnvDatum.find_by(entry_id: datum["entry_id"])
     unless e
-      Rails.logger.info "adding entry_id #{datum["entry_id"]} from thing2"
+      Rails.logger.debug "adding entry_id #{datum["entry_id"]} from thing2"
       thing_id = 2
       Message.create_env_datum(datum, thing_id, "thing2", "field4", "field5", "field6")
-      Rails.logger.info "saved"
+      Rails.logger.debug "saved"
     end
     return e
   end
