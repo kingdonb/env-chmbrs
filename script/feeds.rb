@@ -5,7 +5,7 @@ require "#{Rails.root}/lib/message"
 
 scheduler = Rufus::Scheduler.new
 
-url='http://api.thingspeak.com/channels/198792/feeds.json?results=30'
+url='http://api.thingspeak.com/channels/198792/feeds.json?results=100'
 uri = URI(url)
 
 #Message.fetch_and_process_message(uri)
