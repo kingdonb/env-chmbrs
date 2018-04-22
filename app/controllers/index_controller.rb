@@ -2,12 +2,12 @@ class IndexController < ApplicationController
   def main
     Time.zone = "Eastern Time (US & Canada)"
 
-    @thing_data_short = EnvDatum.joins(:thing).group('things.name').
+    @thing_data_short = EnvDatum.joins(:thing).group('things.name').order('things.name').
       where("env_data.created_at >= ?", Time.zone.now - 4.hours)
-    @thing_data_long = EnvDatum.joins(:thing).group('things.name').
+    @thing_data_long = EnvDatum.joins(:thing).group('things.name').order('things.name').
       where("env_data.created_at >= ?", Time.zone.now - 1.day)
 
-    @thing_data_vlong = EnvDatum.joins(:thing).group('things.name').
+    @thing_data_vlong = EnvDatum.joins(:thing).group('things.name').order('things.name').
       where("env_data.created_at >= ?", Time.zone.now - 2.weeks)
     @data_count = EnvDatum.all.count
   end
