@@ -5,11 +5,11 @@
 
 <%= line_chart @thing_data_short.
   group_by_minute('env_data.created_at', series: false, format: "%F %R %z").
-  average(:temp_c),
+  average(:temp_f),
   library: {
     title: 'Temperature',
     vAxis: {
-      title: '°C',
+      title: '°F',
       gridlines: {count: 12}
     },
     hAxis: {
@@ -37,11 +37,11 @@
 
 <%= line_chart @thing_data_long.
   group_by_minute('env_data.created_at', series: false, format: "%F %R %z").
-  average(:temp_c),
+  average(:temp_f),
   library: {
     title: 'Temperature',
     vAxis: {
-      title: '°C',
+      title: '°F',
       gridlines: {count: 12}
     },
     hAxis: {
@@ -69,11 +69,11 @@
 
 <%= line_chart @thing_data_vlong.
   group_by_hour('env_data.created_at', series: false, format: "%F %R %z").
-  average(:temp_c),
+  average(:temp_f),
   library: {
     title: 'Temperature',
     vAxis: {
-      title: '°C',
+      title: '°F',
       gridlines: {count: 12}
     },
     hAxis: {
