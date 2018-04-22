@@ -3,8 +3,10 @@ class Message
 
   def self.fetch_and_process_message(uri)
     Rails.logger.debug "Fetching data points via ThingSpeak Feeds API"
-    response = Net::HTTP.get(uri)
-    j = JSON.parse(response)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    response = http.get(uri)
+    j = JSON.parse(response.body)
     Rails.logger.debug "Parsed JSON response"
 
     m = Message.new(j["feeds"], j["channel"])
