@@ -10,7 +10,9 @@
     title: 'Temperature',
     vAxis: {
       title: '°F',
-      gridlines: {count: 12}
+      gridlines: {count: 12},
+      min: 48,
+      max: 88
     },
     hAxis: {
       title: "#{today.strftime("%A %F")}",
@@ -42,7 +44,9 @@
     title: 'Temperature',
     vAxis: {
       title: '°F',
-      gridlines: {count: 12}
+      gridlines: {count: 12},
+      min: 48,
+      max: 88
     },
     hAxis: {
       title: "#{(today - 1.day).strftime("%A %F")} to #{today.strftime("%A %F")}",
@@ -74,7 +78,9 @@
     title: 'Temperature',
     vAxis: {
       title: '°F',
-      gridlines: {count: 12}
+      gridlines: {count: 12},
+      min: 48,
+      max: 88
     },
     hAxis: {
       title: "#{(today - 2.weeks).strftime("%A %F")} to #{today.strftime("%A %F")}",
