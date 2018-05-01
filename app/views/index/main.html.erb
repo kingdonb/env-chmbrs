@@ -10,16 +10,17 @@
     title: 'Temperature',
     vAxis: {
       title: '°F',
-      gridlines: {count: 12},
-      min: 48,
-      max: 88
+      gridlines: {count: 12}
     },
     hAxis: {
       title: "#{today.strftime("%A %F")}",
       slantedText: true,
       gridlines: {count: 24}
     },
-  }, adapter: "google" %>
+  },
+  min: 48,
+  max: 88,
+  adapter: "google" %>
 
 <%= line_chart @thing_data_short.
   group_by_minute('env_data.created_at', series: false, format: "%F %R %z").
@@ -44,16 +45,16 @@
     title: 'Temperature',
     vAxis: {
       title: '°F',
-      gridlines: {count: 12},
-      min: 48,
-      max: 88
+      gridlines: {count: 12}
     },
     hAxis: {
       title: "#{(today - 1.day).strftime("%A %F")} to #{today.strftime("%A %F")}",
       slantedText: true,
       gridlines: {count: 24}
     },
-  }, adapter: "google" %>
+  },
+  min: 48,
+  max: 88, adapter: "google" %>
 
 <%= line_chart @thing_data_long.
   group_by_minute('env_data.created_at', series: false, format: "%F %R %z").
@@ -78,16 +79,16 @@
     title: 'Temperature',
     vAxis: {
       title: '°F',
-      gridlines: {count: 12},
-      min: 48,
-      max: 88
+      gridlines: {count: 12}
     },
     hAxis: {
       title: "#{(today - 2.weeks).strftime("%A %F")} to #{today.strftime("%A %F")}",
       slantedText: true,
       gridlines: {count: 24}
     },
-  }, adapter: "google" %>
+  },
+  min: 48,
+  max: 88, adapter: "google" %>
 
 <%= line_chart @thing_data_vlong.
   group_by_hour('env_data.created_at', series: false, format: "%F %R %z").
