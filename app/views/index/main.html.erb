@@ -18,8 +18,8 @@
       gridlines: {count: 24}
     },
   },
-  min: 48,
-  max: 88,
+  min: 65,
+  max: 77,
   adapter: "google" %>
 
 <%= line_chart @thing_data_short.
@@ -53,8 +53,8 @@
       gridlines: {count: 24}
     },
   },
-  min: 48,
-  max: 88, adapter: "google" %>
+  min: 65,
+  max: 77, adapter: "google" %>
 
 <%= line_chart @thing_data_long.
   group_by_minute('env_data.created_at', series: false, format: "%F %R %z").
@@ -87,8 +87,8 @@
       gridlines: {count: 24}
     },
   },
-  min: 48,
-  max: 88, adapter: "google" %>
+  min: 65,
+  max: 77, adapter: "google" %>
 
 <%= line_chart @thing_data_vlong.
   group_by_hour('env_data.created_at', series: false, format: "%F %R %z").
