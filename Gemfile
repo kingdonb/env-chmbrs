@@ -11,7 +11,7 @@ end
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'rufus-scheduler'
-gem 'chartkick'
+gem 'chartkick', '~> 2.0'
 gem 'groupdate'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
