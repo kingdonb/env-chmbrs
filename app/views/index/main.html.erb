@@ -75,7 +75,7 @@
 
 <%= line_chart @thing_data_vlong.
   group_by_hour('env_data.created_at', series: false, format: "%F %R %z").
-  average(:temp_f),
+  average(:temp_c),
   library: {
     title: 'Temperature',
     vAxis: {
